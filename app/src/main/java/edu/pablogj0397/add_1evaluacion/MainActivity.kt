@@ -8,9 +8,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import edu.pablogj0397.add_1evaluacion.core.cache.AppCacheTTL
 import edu.pablogj0397.add_1evaluacion.core.serialization.GsonJsonSerializer
-import edu.pablogj0397.add_1evaluacion.core.serialization.JsonSerializer
 import edu.pablogj0397.add_1evaluacion.core.time.LocalAppTime
-import edu.pablogj0397.add_1evaluacion.features.data.CarXmlLocalDataSource
+import edu.pablogj0397.add_1evaluacion.features.data.local.xml.CarXmlLocalDataSource
 import edu.pablogj0397.add_1evaluacion.features.domain.Car
 
 class MainActivity : AppCompatActivity() {
