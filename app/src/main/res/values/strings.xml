@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">add-1evaluacion</string>
+    <string name="local_app_cache">app_cache_ttl</string>
+    <string name="xml_car_datasource">xml_car_datasource</string>
 </resources>
