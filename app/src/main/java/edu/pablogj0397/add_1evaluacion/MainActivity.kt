@@ -11,6 +11,7 @@ import edu.pablogj0397.add_1evaluacion.core.serialization.GsonJsonSerializer
 import edu.pablogj0397.add_1evaluacion.core.time.LocalAppTime
 import edu.pablogj0397.add_1evaluacion.features.data.local.xml.CarXmlLocalDataSource
 import edu.pablogj0397.add_1evaluacion.features.domain.Car
+import edu.pablogj0397.add_1evaluacion.features.domain.Owner
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,10 +32,10 @@ class MainActivity : AppCompatActivity() {
 
        //Declaramos un mock de datos para probar que funciona
         val mock = listOf(
-            Car("1111-AAA","1A","M1"),
-            Car("2222-BBB","2B","M2"),
-            Car("3333-CCC","3C","M3"),
-            Car("4444-DDD","4D","M4")
+            Car("1111-AAA","1A","M1", Owner("1A","Nombre1", "Apellido1")),
+            Car("2222-BBB","2B","M2",Owner("1A","Nombre1", "Apellido1")),
+            Car("3333-CCC","3C","M3",Owner("2B","Nombre2", "Apellido2")),
+            Car("4444-DDD","4D","M4",Owner("1B","Nombre2", "Apellido2"))
         )
 
         //Probamos save() + findAll(), debe devolver el mock de datos
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         Log.d("TEST","Prueba save + findAll: ${dataSource.findAll()}")
 
         //Probamos saveOne(), debe devolver la lista con el nuevo elemento añadido
-        dataSource.saveOne(Car("5555-EEE","5E","M5"))
+        dataSource.saveOne(Car("5555-EEE","5E","M5",Owner("3C","Nombre3", "Apellido3")))
         Log.d("TEST","Prueba saveOne: ${dataSource.findAll()}")
 
         //Probamos findByPlate
@@ -63,9 +64,9 @@ class MainActivity : AppCompatActivity() {
 
         //Probamos que save no guarda coches con matricula duplicada
         val mock2 = listOf(
-            Car("1111-AAA","1A","M1"),
-            Car("1111-AAA","1A","M1"),
-            Car("4444-DDD","4D","M4")
+            Car("1111-AAA","1A","M1",Owner("3C","Nombre3", "Apellido3")),
+            Car("1111-AAA","1A","M1",Owner("3C","Nombre3", "Apellido3")),
+            Car("4444-DDD","4D","M4",Owner("3C","Nombre3", "Apellido3"))
         )
         dataSource.save(mock2)
         Log.d("TEST","Prueba save con duplicados: ${dataSource.findAll()}") //debe devolver la lista solo con los coches 1 y 4, sin duplicados.
