@@ -19,8 +19,9 @@ class CarXmlLocalDataSource (
 
 
     fun save(cars: List<Car>){
+        val carsChecked = cars.distinctBy { it.carPlate }
         sharedPref.edit().apply {
-            putString(carKey,serializer.toJson(cars))
+            putString(carKey,serializer.toJson(carsChecked))
             apply()
         }
         appCache.updateTime(carKey)
@@ -28,7 +29,8 @@ class CarXmlLocalDataSource (
     }
 
     fun saveOne(car: Car){
-        val carList = listOf<Car>(car)
+        val carList = findAll().toMutableList()
+        carList.add(car)
         save(carList)
 
     }
